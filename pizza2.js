@@ -32,15 +32,15 @@ function pizzaDelivery2(input) {
     throw new Error('Input needs to be a string!')
   }
   // create new instances of DeliveryGuy class
-  let person1 = new DeliveryGuy()
-  let person2 = new DeliveryGuy()
-  let team = [person1, person2]
+  let maria = new DeliveryGuy()
+  let clovis = new DeliveryGuy()
+  let team = [maria, clovis]
   let grid = new Set()
   // add starting point to the set
   grid.add('0:0')
   // iterate through the instructions and assign to each delivery person
-  for (var i = 0; i < input.length; i++) {
-    let currTurn = team[i % 2]
+  for (let i = 0; i < input.length; i++) {
+    let currTurn = team[i % team.length]
     let currPosition = currTurn.deliver(input[i])
     grid.add(currPosition)
   }
