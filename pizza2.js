@@ -39,7 +39,7 @@ function pizzaDelivery2(input) {
   // add starting point to the set
   grid.add('0:0')
   // iterate through the instructions and assign to each delivery person
-  for (let i = 0; i < input.length; i++) {
+  for (var i = 0; i < input.length; i++) {
     let currTurn = team[i % team.length]
     let currPosition = currTurn.deliver(input[i])
     grid.add(currPosition)
