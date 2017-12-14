@@ -1,4 +1,4 @@
-### Hi I'm an algorithm to dispatch pizza delivery instructions for either 1 or 2 delivery people.
+### Hi! I'm an algorithm to dispatch pizza delivery instructions for either 1 or 2 delivery people.
 
 ### To run my unit tests:
 1. You will need Node version 0.10+ 
