@@ -11,4 +11,3 @@
 <b>2565</b> with 1 delivery person
 2. Given the same string of dispatcher inputs as in Part One, how many houses receive at least one pizza?
 <b>2639</b> with 2 delivery person
->>>>>>> 50c3c08c4b46f5fb7ba496a142d5fb97d7ef9052
