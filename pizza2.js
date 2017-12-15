@@ -6,6 +6,7 @@ class DeliveryGuy {
     this.x = 0
     this.y = 0
     this.name = name
+    // to keep track of visisted cordinates in case we want to use for the UI
     this.visited = []
   }
   deliver(input) {
@@ -22,7 +23,7 @@ class DeliveryGuy {
       throw new Error('Input should be in {^,v, >, <}')
     }
     var newPosition = `${this.x}:${this.y}`
-    // keep track of visted cordinates to draw out on the UI
+    // update houses that deliver person has visisted in case we want to optimize routes
     this.visited.push(newPosition)
     return newPosition
   }
@@ -53,7 +54,7 @@ class PizzaDispatcher {
     grid.add('0:0')
     // Iterate through delivery guys instances since the keys are just their names
     var deliveryGuys = Object.values(this.deliveryGuysByName)
-    // iterate through the instructions and assign to each delivery person
+    // Iterate through the instructions and assign to each delivery person
     for (var i = 0; i < this.input.length; i++) {
       let deliveryGuy = deliveryGuys[i % deliveryGuys.length]
       let currPosition = deliveryGuy.deliver(this.input[i])
