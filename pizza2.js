@@ -2,9 +2,11 @@
 
 // define class DeliveryGuy that has method deliver
 class DeliveryGuy {
-  constructor() {
+  constructor(name) {
     this.x = 0
     this.y = 0
+    this.name = name
+    this.visited = []
   }
   deliver(input) {
     if (input === '^') {
@@ -19,30 +21,48 @@ class DeliveryGuy {
     } else {
       throw new Error('Input should be in {^,v, >, <}')
     }
-    return `${this.x}:${this.y}`
+    var newPosition = `${this.x}:${this.y}`
+    // keep track of visted cordinates to draw out on the UI
+    this.visited.push(newPosition)
+    return newPosition
+  }
+}
+
+class PizzaDispatcher {
+  constructor(input, names) {
+    this.input = input
+    // By using a hashmap, we can now keep track of their details like names and visited positions
+    this.deliveryGuysByName = {}
+    // Adding details of each delivery guy to the hashmap
+    for (let i = 0; i < names.length; i++) {
+      this.deliveryGuysByName[names[i]] = new DeliveryGuy(names[i])
+    }
+  }
+  dispatch() {
+    // handle edge cases
+    if (this.input === '') {
+      return 1
+    }
+    if (typeof this.input !== 'string') {
+      throw new Error('Input needs to be a string!')
+    }
+
+    let grid = new Set()
+    // add starting point to the set
+    grid.add('0:0')
+    // Iterate through delivery guys instances since the keys are just their names
+    var deliveryGuys = Object.values(this.deliveryGuysByName)
+    // iterate through the instructions and assign to each delivery person
+    for (var i = 0; i < this.input.length; i++) {
+      let deliveryGuy = deliveryGuys[i % deliveryGuys.length]
+      let currPosition = deliveryGuy.deliver(this.input[i])
+      grid.add(currPosition)
+    }
+    return grid.size
   }
 }
 
 function pizzaDelivery2(input) {
-  // handle edge cases
-  if (input === '') {
-    return 1
-  }
-  if (typeof input !== 'string') {
-    throw new Error('Input needs to be a string!')
-  }
-  // create new instances of DeliveryGuy class
-  let maria = new DeliveryGuy()
-  let clovis = new DeliveryGuy()
-  let team = [maria, clovis]
-  let grid = new Set()
-  // add starting point to the set
-  grid.add('0:0')
-  // iterate through the instructions and assign to each delivery person
-  for (var i = 0; i < input.length; i++) {
-    let currTurn = team[i % team.length]
-    let currPosition = currTurn.deliver(input[i])
-    grid.add(currPosition)
-  }
-  return grid.size
+  let dispatcher = new PizzaDispatcher(input, ["maria", "clovis"])
+  return dispatcher.dispatch()
 }

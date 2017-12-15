@@ -2,11 +2,15 @@ describe('DeliveryGuy class', function() {
   var deliveryWoman
 
   beforeEach(function() {
-    deliveryWoman = new DeliveryGuy()
+    deliveryWoman = new DeliveryGuy('maria')
   })
 
   it('has methods `deliver`', function() {
     expect(typeof deliveryWoman.deliver).toBe('function')
+  })
+
+  it('has visited property', function() {
+    expect(typeof deliveryWoman.visited).toEqual(typeof [])
   })
 
   it('starts with x and y cordinates at 0', function () {
@@ -20,8 +24,8 @@ describe('DeliveryGuy class', function() {
     })
 
     it('decreases y and x should be unchanged when input is <', function() {
-    expect(deliveryWoman.deliver('<')).toEqual('0:-1')
-  })
+      expect(deliveryWoman.deliver('<')).toEqual('0:-1')
+    })
 
     it('increases y and x should be unchanged when input is >', function() {
       expect(deliveryWoman.deliver('>')).toEqual('0:1')
@@ -30,7 +34,23 @@ describe('DeliveryGuy class', function() {
     it('increases x and y should be unchanged when input is v', function(){
       expect(deliveryWoman.deliver('v')).toEqual('1:0')
     })
-  })  
+  })
+})
+
+describe('PizzaDispatcher class', function() {
+  var dispatcher
+  beforeEach(function() {
+    dispatcher = new PizzaDispatcher('<>^>', ['maria', 'clovis'])
+  })
+  it('has methods `dispatch`', function() {
+    expect(typeof dispatcher.dispatch).toBe('function')
+  })
+  it('dispatch method returns the correct number of houses', function() {
+    expect(dispatcher.dispatch()).toEqual(5)
+  })
+  it('has deliverGuysByName property', function() {
+    expect(typeof dispatcher.deliveryGuysByName).toEqual(typeof {})
+  })
 })
 
 describe('pizzaDelivery2 method', function(){
@@ -46,11 +66,9 @@ describe('pizzaDelivery2 method', function(){
     expect(function() {pizzaDelivery('<><<123')}).toThrow()
   })
 
-  it('calls deliver method the expected number of times', function(){
-    spyOn(DeliveryGuy.prototype, 'deliver')
-    pizzaDelivery2('<><>')
-    expect(DeliveryGuy.prototype.deliver).toHaveBeenCalled()
-    expect(DeliveryGuy.prototype.deliver.calls.count()).toEqual(4)
+  it('returns the correct result with appropriate number of delivery person', function(){
+    let validResult = pizzaDelivery2('<>^>')
+    expect(validResult).toEqual(5)
   })
 
   it('adds cordinates to the set when input is valid', function(){
