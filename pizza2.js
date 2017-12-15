@@ -29,6 +29,7 @@ class DeliveryGuy {
 }
 
 class PizzaDispatcher {
+  // accomodate an array of delivery people's names as input
   constructor(input, names) {
     this.input = input
     // By using a hashmap, we can now keep track of their details like names and visited positions
