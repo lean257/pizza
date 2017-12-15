@@ -13,10 +13,10 @@
 <b>2639</b> with 2 delivery person
 
 ### Refactored
-1. Refactor pizzaDelivery2 function to a class so I can reuse it for any number of delivery men
-2. PizzaDispatcher is now a class that takes input instruction and array of names of delivery people
-3. Inside PizzaDispatcher we have a hashmap that stores multiple delivery men instances, each with their own details like name, color, cordinates, visited houses
-4. Update unit tests for the new class
+1. Refactored pizzaDelivery2 function to a class so I can reuse it for any number of delivery men.
+2. PizzaDispatcher is now a class that takes input instruction and array of names of delivery people.
+3. PizzaDispatcher now has a new property called deliveryGuysByName, which is a hashmap that stores multiple delivery men instances, each with their own details like name, color, cordinates, and visited houses.
+4. Updated unit tests for the new class.
 
 ### ToDo
 1. Build an UI for the dispatcher
